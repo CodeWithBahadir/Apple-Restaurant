@@ -985,7 +985,43 @@
 
 
 
-<script src="app.js"></script>
- <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+ <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
+ </script>
+ <script> document.addEventListener("DOMContentLoaded", () => {
+  const searchIcon = document.getElementById("searchIcon");
+  const searchBox = document.getElementById("searchBox");
+
+  // Icona kliklə aç/gizlət
+  searchIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    searchBox.classList.toggle("active");
+
+    if (searchBox.classList.contains("active")) {
+      searchBox.querySelector("input").focus();
+    }
+  });
+
+  // Başqa yerə klik ediləndə bağla
+  document.addEventListener("click", (e) => {
+    if (!searchBox.contains(e.target) && e.target !== searchIcon) {
+      searchBox.classList.remove("active");
+    }
+  });
+});
+
+
+function toggleCartMenu() {
+  const dropdown = document.getElementById("cartDropDown");
+  dropdown.classList.toggle("active");
+  
+  // Kliklənmə zamanı menyunu bağlamaq
+  document.addEventListener("click", function(event) {
+    if (!event.target.closest(".cart-container")) {
+      dropdown.classList.remove("active");
+    }
+  });
+}</script>
 </body>
 </html>
